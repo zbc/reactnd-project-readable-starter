@@ -5,6 +5,7 @@
   "dependencies": {
     "axios": "^0.16.2",
     "lodash": "^4.17.4",
+    "moment": "^2.18.1",
     "react": "^16.0.0",
     "react-dom": "^16.0.0",
     "react-redux": "^5.0.6",
@@ -12,7 +13,8 @@
     "react-scripts": "1.0.14",
     "redux": "^3.7.2",
     "redux-form": "^7.1.0",
-    "redux-promise": "^0.5.3"
+    "redux-promise": "^0.5.3",
+    "uuid": "^3.1.0"
   },
   "scripts": {
     "start": "react-scripts start",
