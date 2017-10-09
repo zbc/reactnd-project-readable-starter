@@ -1,13 +1,17 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
-import { fetchPost, deletePost } from '../actions';
-import Posts from './posts';
+import { fetchPost, deletePost, fetchComments, deleteComment } from '../actions';
+import Post from './post';
+import Comment from './comment';
+import CommentBox from './comment_box';
+import _ from 'lodash';
 
 class PostsDetail extends Component {
     componentDidMount() {
         const {id} = this.props.match.params;
         this.props.fetchPost(id);
+        this.props.fetchComments(id);
     }
     
     onDeleteClick() {
@@ -16,7 +20,37 @@ class PostsDetail extends Component {
         this.props.deletePost(id, () => {
             this.props.history.push("/");
         });
+    }
 
+    onDeleteCommentClick(id) {
+        this.props.deleteComment(id, () => {
+            
+        });
+    }
+
+    renderComments() {
+        return _.map(this.props.comments, comment => {
+            const {id, timestamp, author, body, voteScore } = comment;
+
+            return (
+                <div key={id}>
+                    <div className="row">
+                        <button
+                            className="btn btn-danger pull-xs-right"
+                            onClick={this.onDeleteCommentClick.bind(this, id)}
+                        >
+                            Delete Comment 
+                        </button>
+                    </div>
+                    <Comment
+                        timestamp={timestamp}
+                        author={author}
+                        body={body}
+                        voteScore={voteScore}
+                    />
+                </div>
+            ); 
+        });
     }
 
     render() {
@@ -39,9 +73,9 @@ class PostsDetail extends Component {
                         Delete Post
                 </button>
                 </div>
-                <div className="col-md-2"></div>
-                <div className="col-md-8">
-                    <Posts 
+                <div className="col-md-1"></div>
+                <div className="col-md-10">
+                    <Post 
                         id={id} 
                         title={title} 
                         body={body} 
@@ -50,16 +84,26 @@ class PostsDetail extends Component {
                         category={category} 
                         voteScore={voteScore} 
                         isDetail={true}
+                        comments={_.size(this.props.comments)}
                     />
+                    <div>
+                        <CommentBox post_id={id} history={this.props.history}/>                        
+                    </div>
+                    <div>
+                        { this.renderComments() }
+                    </div> 
                 </div>
-                <div className="col-md-2"></div>
+                <div className="col-md-1"></div>
             </div>
         );
     }
 }
 
-function mapStateToProps({ posts }, ownProps) {
-    return { post: posts[ownProps.match.params.id] }; 
+function mapStateToProps({ posts, comments }, ownProps) {
+    return { 
+        post: posts[ownProps.match.params.id],
+        comments
+    }; 
 }
 
-export default connect(mapStateToProps, { fetchPost, deletePost })(PostsDetail);
+export default connect(mapStateToProps, { fetchPost, deletePost, fetchComments, deleteComment })(PostsDetail);

@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import './App.css';
-import { Route, Switch} from 'react-router-dom';
+import { Route, Switch } from 'react-router-dom';
 import PostsIndex from './components/posts_index';
 import PostsNew from './components/posts_new';
 import PostsDetail from './components/posts_detail'
@@ -12,6 +12,7 @@ class App extends Component {
     return (
       <div className="container-fluid main">
         <div className="row">
+         
           <CategoryIndex /> 
         </div>
         <hr />

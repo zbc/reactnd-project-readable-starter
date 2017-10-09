@@ -3,7 +3,7 @@ import _ from 'lodash';
 import { connect } from 'react-redux';
 import { fetchCategoryPosts } from '../actions';
 import { Link } from 'react-router-dom';
-import Posts from './posts';
+import Post from './post';
 
 class CategoryPosts extends Component {
     componentDidMount() {
@@ -24,7 +24,7 @@ class CategoryPosts extends Component {
             const { id, title, body, author, timestamp, category, voteScore } = post;
 
             return (
-                <Posts 
+                <Post 
                     key={id} 
                     id={id} 
                     title={title} 

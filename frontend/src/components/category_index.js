@@ -23,11 +23,16 @@ class CategoryIndex extends Component {
 
     render() {
         return (
-                <div>
-                    <ul className="nav nav-pills justify-content-center">
-                        {this.renderCategories()}
-                    </ul>
-                </div>
+            <div>
+                <ul className="nav nav-pills justify-content-center">
+                    <li className="nav-item">
+                        <Link className="nav-link" to="/" >
+                            All
+                        </Link>
+                    </li>
+                    {this.renderCategories()}
+                </ul>
+            </div>
         );
     }
 }

@@ -3,7 +3,7 @@ import _ from 'lodash';
 import { connect } from 'react-redux';
 import { fetchPosts } from '../actions';
 import { Link } from 'react-router-dom';
-import Posts from './posts';
+import Post from './post';
 
 class PostsIndex extends Component {
     componentDidMount() {
@@ -15,17 +15,19 @@ class PostsIndex extends Component {
             const { id, title, body, author, timestamp, category, voteScore } = post;
 
             return (
-                <Posts 
-                    key={id} 
-                    id={id} 
-                    title={title} 
-                    body={body} 
-                    author={author} 
-                    timestamp={timestamp} 
-                    category={category} 
-                    voteScore={voteScore} 
-                    isDetail={false}
-                />
+                <div key={id} className="section">
+                    <Post
+                        key={id}
+                        id={id}
+                        title={title}
+                        body={body}
+                        author={author}
+                        timestamp={timestamp}
+                        category={category}
+                        voteScore={voteScore}
+                        isDetail={false}
+                    />
+                </div>
             );
         });
     }
