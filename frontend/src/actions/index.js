@@ -11,6 +11,8 @@ export const FETCH_CATEGORY_POSTS = 'FETCH_CATEGORY_POST';
 export const FETCH_COMMENTS = 'FETCH_COMMENTS';
 export const UP_VOTE = 'UP_VOTE';
 export const DOWN_VOTE = 'DOWN_VOTE';
+export const UP_VOTE_COMMENT = 'UP_VOTE_COMMENT';
+export const DOWN_VOTE_COMMENT = 'DOWN_VOTE_COMMENT';
 
 const ROOT_URL = "http://localhost:3001";
 const AUTH_HEADER = { 'Authorization': 'robo123' };
@@ -86,6 +88,39 @@ export function downVote(id, callback) {
    
     return {
         type: DOWN_VOTE,
+        payload: request
+    }
+}
+export function upVoteComment(id, callback) {
+    const request = axios({
+        method: 'post',
+        url: `${ROOT_URL}/comments/${id}`,
+        headers: AUTH_HEADER,
+        data: {
+            option: "upVote"
+        } 
+    })
+    .then(() => callback());
+   
+    return {
+        type: UP_VOTE_COMMENT,
+        payload: request
+    }
+}
+
+export function downVoteComment(id, callback) {
+    const request = axios({
+        method: 'post',
+        url: `${ROOT_URL}/comments/${id}`,
+        headers: AUTH_HEADER,
+        data: {
+            option: "downVote"
+        } 
+    })
+    .then(() => callback());
+   
+    return {
+        type: DOWN_VOTE_COMMENT,
         payload: request
     }
 }

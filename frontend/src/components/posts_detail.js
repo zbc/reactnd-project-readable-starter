@@ -30,7 +30,7 @@ class PostsDetail extends Component {
 
     renderComments() {
         return _.map(this.props.comments, comment => {
-            const {id, timestamp, author, body, voteScore } = comment;
+            const {id, timestamp, author, body, voteScore, parentId } = comment;
 
             return (
                 <div key={id}>
@@ -43,10 +43,12 @@ class PostsDetail extends Component {
                         </button>
                     </div>
                     <Comment
+                        id={id}
                         timestamp={timestamp}
                         author={author}
                         body={body}
                         voteScore={voteScore}
+                        post_id={parentId}
                     />
                 </div>
             ); 

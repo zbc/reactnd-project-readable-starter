@@ -1,26 +1,48 @@
-import React from 'react';
+import React, { Component } from 'react';
 import moment from 'moment';
+import { connect } from 'react-redux';
+import { upVoteComment, downVoteComment, fetchComments } from '../actions';
 
-const Comment = (props) => {
-    const { author, body, timestamp, voteScore } = props;
+class Comment extends Component {
+    onUpVoteComment(id) {
+        this.props.upVoteComment(id, () => {
+            this.props.fetchComments(this.props.post_id);
+        });
+    }
 
-    return (
-        <div className="row comment">
-            <div className="col-md-1"></div>
-            <div className="col-md-9">
-                <div>
+    onDownVoteComment(id) {
+        this.props.downVoteComment(id, () => {
+            this.props.fetchComments(this.props.post_id);
+        });
+    }
+
+    render() {
+        const { id, author, body, timestamp, voteScore } = this.props;
+
+        return (
+            <div className="row comment">
+                <div className="col-md-1"></div>
+                <div className="col-md-9">
                     <div>
-                        <strong>{author}</strong> <span className="text-muted">{moment(timestamp).format('LLLL')}</span>
-                        <span>VoteScore: {voteScore}</span>
-                    </div>
-                    <div>
-                        {body}
+                        <div>
+                            <strong>{author}</strong> | <span className="text-muted">{moment(timestamp).format('LLLL')}</span> |
+                                <span>VoteScore: {voteScore}</span>
+                            <button className="btn btn-default voteBtn" onClick={this.onUpVoteComment.bind(this, id)} >
+                                ↑
+                                </button>
+                            <button className="btn btn-default voteBtn" onClick={this.onDownVoteComment.bind(this, id)} >
+                                ↓
+                                </button>
+                        </div>
+                        <div>
+                            {body}
+                        </div>
                     </div>
                 </div>
+                <div className="col-md-2"></div>
             </div>
-            <div className="col-md-2"></div>
-        </div>
-    );
+        );
+    }
 }
 
-export default Comment;
+export default connect(null, {upVoteComment, downVoteComment, fetchComments})(Comment);
