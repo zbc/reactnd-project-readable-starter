@@ -4,6 +4,8 @@ export const FETCH_POSTS = 'FETCH_POSTS';
 export const CREATE_POST = 'CREATE_POST';
 export const DELETE_POST = 'DELETE_POST';
 export const FETCH_POST = 'FETCH_POST';
+export const FETCH_CATEGORIES = 'FETCH_CATEGORIES';
+export const FETCH_CATEGORY_POSTS = 'FETCH_CATEGORY_POST';
 
 const ROOT_URL = "http://localhost:3001";
 const AUTH_HEADER = { 'Authorization': 'robo123' };
@@ -40,7 +42,7 @@ export function createPost(values, callback) {
 }
 
 export function deletePost(id, callback) {
-    const request = axios({
+    axios({
         method: 'delete',
         url: `${ROOT_URL}/posts/${id}`,
         headers: AUTH_HEADER
@@ -64,4 +66,30 @@ export function fetchPost(id) {
         type: FETCH_POST,
         payload: request 
     }
+}
+
+export function fetchCategories() {
+    const request = axios({
+        method: 'get',
+        url: `${ROOT_URL}/categories`,
+        headers: AUTH_HEADER
+    });
+    
+    return {
+        type: FETCH_CATEGORIES,
+        payload: request 
+    }
+}
+
+export function fetchCategoryPosts(category) {
+    const request = axios({
+        method: 'get',
+        url: `${ROOT_URL}/${category}/posts`,
+        headers: AUTH_HEADER
+    });
+    
+    return {
+        type: FETCH_CATEGORY_POSTS,
+        payload: request 
+    } 
 }

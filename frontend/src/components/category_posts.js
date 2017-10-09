@@ -1,14 +1,23 @@
 import React, { Component } from 'react';
 import _ from 'lodash';
 import { connect } from 'react-redux';
-import { fetchPosts } from '../actions';
+import { fetchCategoryPosts } from '../actions';
 import { Link } from 'react-router-dom';
 import Posts from './posts';
 
-class PostsIndex extends Component {
+class CategoryPosts extends Component {
     componentDidMount() {
-        this.props.fetchPosts();
+        const {category} = this.props.match.params;
+        this.props.fetchCategoryPosts(category);
     }
+
+    componentWillReceiveProps(nextProps){
+        //call your api and update state with new props
+
+         if (this.props.match.params.category !== nextProps.match.params.category) {
+             this.props.fetchCategoryPosts(nextProps.match.params.category);
+         }
+     }
 
     renderPosts() {
         return _.map(this.props.posts, post => {
@@ -56,4 +65,4 @@ function mapStateToProps({ posts }) {
     }
 }
 
-export default connect(mapStateToProps, { fetchPosts })(PostsIndex);
+export default connect(mapStateToProps, { fetchCategoryPosts })(CategoryPosts);
