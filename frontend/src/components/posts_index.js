@@ -62,28 +62,31 @@ class PostsIndex extends Component {
 
         return (
             <div>
-                <div className="text-xs-left">
-                    <span>
-                        Sort By: 
-                    </span>
-                    <button 
-                        className={btnClassNameForVote}
-                        onClick={this.onSortByVote.bind(this)}
-                    >
-                        VoteScore
-                    </button>
-                    <button 
-                        className={btnClassNameForTime}
-                        onClick={this.onSortByTime.bind(this)}
-                    >
-                        Time
-                    </button>
-                </div> 
-                <div className="text-xs-right">
-                    <Link className="btn btn-primary" to="/posts">
-                        Add a Post
+                <div className="row">
+                    <div className="pull-xs-left">
+                        <span>
+                            Sort By:
+                        </span>
+                        <button
+                            className={btnClassNameForVote}
+                            onClick={this.onSortByVote.bind(this)}
+                        >
+                            VoteScore
+                        </button>
+                        <button
+                            className={btnClassNameForTime}
+                            onClick={this.onSortByTime.bind(this)}
+                        >
+                            Time
+                        </button>
+                    </div>
+                    <div className="pull-xs-right">
+                        <Link className="btn btn-primary" to="/posts">
+                            Add a Post
                     </Link>
+                    </div>
                 </div>
+
                 <div className="row">
                     <div className="col-md-2"></div>
                     <div className="col-md-8">
