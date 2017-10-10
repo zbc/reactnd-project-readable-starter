@@ -6,6 +6,7 @@ import Post from './post';
 import Comment from './comment';
 import CommentBox from './comment_box';
 import _ from 'lodash';
+import sortBy from 'sort-by';
 
 class PostsDetail extends Component {
     componentDidMount() {
@@ -29,7 +30,10 @@ class PostsDetail extends Component {
     }
 
     renderComments() {
-        return _.map(this.props.comments, comment => {
+        let commentsSorted = _.values(this.props.comments);
+        commentsSorted.sort(sortBy('-voteScore'));
+
+        return _.map(commentsSorted, comment => {
             const {id, timestamp, author, body, voteScore, parentId } = comment;
 
             return (

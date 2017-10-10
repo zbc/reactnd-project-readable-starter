@@ -4,14 +4,30 @@ import { connect } from 'react-redux';
 import { fetchPosts } from '../actions';
 import { Link } from 'react-router-dom';
 import Post from './post';
+import sortBy from 'sort-by';
 
 class PostsIndex extends Component {
-    componentDidMount() {
-        this.props.fetchPosts();
+    state={
+        sort: "voteScore"
     }
 
+    componentDidMount() {
+         this.props.fetchPosts();
+    }
+
+    onSortByVote() {
+        this.setState({sort: "voteScore"});
+    }
+
+    onSortByTime() {
+        this.setState({sort: "timestamp"});
+    }
+    
     renderPosts() {
-        return _.map(this.props.posts, post => {
+        let postsSorted = _.values(this.props.posts);
+        postsSorted.sort(sortBy(`-${this.state.sort}`));
+
+        return _.map(postsSorted, post => {
             const { id, title, body, author, timestamp, category, voteScore } = post;
 
             return (
@@ -33,8 +49,36 @@ class PostsIndex extends Component {
     }
 
     render() {
+        let btnClassNameForVote = "";
+        let btnClassNameForTime = "";
+
+        if (this.state.sort === "voteScore") {
+            btnClassNameForVote = `btn btn-primary sortBtn active`;
+            btnClassNameForTime = `btn btn-primary sortBtn`; 
+        } else {
+            btnClassNameForVote = `btn btn-primary sortBtn`;
+            btnClassNameForTime = `btn btn-primary sortBtn active`;  
+        }
+
         return (
             <div>
+                <div className="text-xs-left">
+                    <span>
+                        Sort By: 
+                    </span>
+                    <button 
+                        className={btnClassNameForVote}
+                        onClick={this.onSortByVote.bind(this)}
+                    >
+                        VoteScore
+                    </button>
+                    <button 
+                        className={btnClassNameForTime}
+                        onClick={this.onSortByTime.bind(this)}
+                    >
+                        Time
+                    </button>
+                </div> 
                 <div className="text-xs-right">
                     <Link className="btn btn-primary" to="/posts">
                         Add a Post

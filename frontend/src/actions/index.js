@@ -22,7 +22,7 @@ export function fetchPosts() {
         method: 'get',
         url: `${ROOT_URL}/posts`,
         headers: AUTH_HEADER
-    });
+    })
     
     return {
         type: FETCH_POSTS,
