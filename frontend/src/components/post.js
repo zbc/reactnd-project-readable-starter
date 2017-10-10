@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import moment from 'moment';
 import { connect } from 'react-redux';
-import { upVote, downVote, fetchPosts } from '../actions';
+import { upVote, downVote, fetchPosts, deletePost} from '../actions';
 
 class Post extends Component {
 
@@ -17,17 +17,28 @@ class Post extends Component {
             this.props.fetchPosts();
         });
     }
+
+    onDeletePost(id) {
+        this.props.deletePost(id, () => {
+            this.props.fetchPosts();
+        });
+    }
     
     render() {
         const { id, title, body, author, timestamp, category, voteScore, isDetail, comments } = this.props;
         return (
             <div className="text-left" >
                 <div className="row">
+                    <button 
+                        onClick={this.onDeletePost.bind(this, id)}
+                        className="btn btn-danger pull-md-right">
+                        Delete Post
+                    </button>
                     <h4>
                         <strong>
                             {isDetail
                                 ? title
-                                : <Link to={`/posts/${id}`}>
+                                : <Link to={`/${category}/${id}`}>
                                     {title}
                                 </Link>
                             }
@@ -60,4 +71,4 @@ class Post extends Component {
         );
     }
 }
-export default connect(null, { upVote, downVote, fetchPosts })(Post);
+export default connect(null, { upVote, downVote, fetchPosts, deletePost })(Post);

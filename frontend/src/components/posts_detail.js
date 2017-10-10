@@ -15,14 +15,6 @@ class PostsDetail extends Component {
         this.props.fetchComments(id);
     }
     
-    onDeleteClick() {
-        const {id} = this.props.match.params;
-        
-        this.props.deletePost(id, () => {
-            this.props.history.push("/");
-        });
-    }
-
     onDeleteCommentClick(id) {
         this.props.deleteComment(id, () => {
             
@@ -72,12 +64,6 @@ class PostsDetail extends Component {
             <div className="container">
                 <div className="row">
                     <Link to="/" className="btn btn-primary">Back</Link>
-                    <button
-                        className="btn btn-danger pull-xs-right"
-                        onClick={this.onDeleteClick.bind(this)}
-                    >
-                        Delete Post
-                </button>
                 </div>
                 <div className="col-md-1"></div>
                 <div className="col-md-10">

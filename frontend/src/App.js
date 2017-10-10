@@ -12,14 +12,13 @@ class App extends Component {
     return (
       <div className="container-fluid main">
         <div className="row">
-         
           <CategoryIndex /> 
         </div>
         <hr />
         <Switch>
-          <Route path="/:category/posts" component={CategoryPosts} ></Route>
-          <Route path="/posts/:id" component={PostsDetail}></Route>
+          <Route path="/:category/:id" component={PostsDetail}></Route>
           <Route path="/posts" component={PostsNew} ></Route>
+          <Route path="/:category" component={CategoryPosts} ></Route>
           <Route path="/" component={PostsIndex}></Route>
         </Switch>
       </div>

@@ -13,7 +13,7 @@ class CategoryIndex extends Component {
         return _.map(this.props.categories, category => {
             return (
                 <li key={category.name} className="nav-item">
-                    <Link to={`/${category.path}/posts`} className="nav-link">
+                    <Link to={`/${category.path}`} className="nav-link">
                         {category.name}
                     </Link>
                 </li>
