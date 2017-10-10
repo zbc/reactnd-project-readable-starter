@@ -14,14 +14,8 @@ class PostsDetail extends Component {
         this.props.fetchPost(id);
         this.props.fetchComments(id);
     }
-    
-    onDeleteCommentClick(id) {
-        this.props.deleteComment(id, () => {
-            
-        });
-    }
 
-    renderComments() {
+    renderComments(category) {
         let commentsSorted = _.values(this.props.comments);
         commentsSorted.sort(sortBy('-voteScore'));
 
@@ -30,14 +24,6 @@ class PostsDetail extends Component {
 
             return (
                 <div key={id}>
-                    <div className="row">
-                        <button
-                            className="btn btn-danger pull-xs-right"
-                            onClick={this.onDeleteCommentClick.bind(this, id)}
-                        >
-                            Delete Comment 
-                        </button>
-                    </div>
                     <Comment
                         id={id}
                         timestamp={timestamp}
@@ -45,6 +31,7 @@ class PostsDetail extends Component {
                         body={body}
                         voteScore={voteScore}
                         post_id={parentId}
+                        category={category}
                     />
                 </div>
             ); 
@@ -82,7 +69,7 @@ class PostsDetail extends Component {
                         <CommentBox post_id={id} history={this.props.history}/>                        
                     </div>
                     <div>
-                        { this.renderComments() }
+                        { this.renderComments(category) }
                     </div> 
                 </div>
                 <div className="col-md-1"></div>
