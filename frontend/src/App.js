@@ -4,6 +4,7 @@ import { Route, Switch } from 'react-router-dom';
 import PostsIndex from './components/posts_index';
 import PostsNew from './components/posts_new';
 import PostsDetail from './components/posts_detail'
+import PostsEdit from './components/posts_edit';
 import CategoryIndex from './components/category_index';
 import CategoryPosts from './components/category_posts';
 
@@ -16,6 +17,7 @@ class App extends Component {
         </div>
         <hr />
         <Switch>
+          <Route path="/:category/:id/edit" component={PostsEdit}></Route>
           <Route path="/:category/:id" component={PostsDetail}></Route>
           <Route path="/posts" component={PostsNew} ></Route>
           <Route path="/:category" component={CategoryPosts} ></Route>

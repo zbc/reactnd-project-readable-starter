@@ -31,9 +31,14 @@ class Post extends Component {
                 <div className="row">
                     <button 
                         onClick={this.onDeletePost.bind(this, id)}
-                        className="btn btn-danger pull-md-right">
+                        className="btn btn-danger marginBtn pull-md-right">
                         Delete Post
                     </button>
+                    <Link
+                        to={`/${category}/${id}/edit`}
+                        className="btn btn-primary marginBtn pull-md-right">
+                        Edit Post 
+                    </Link>
                     <h4>
                         <strong>
                             {isDetail
