@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import _ from "lodash";
 import { connect } from "react-redux";
-import { fetchPosts } from "../actions";
+import { fetchPosts, deleteComment } from "../actions";
 import { Link } from "react-router-dom";
 import Post from "./post";
 import sortBy from "sort-by";
@@ -10,7 +10,9 @@ class PostsIndex extends Component {
   state = {
     sort: "voteScore"
   };
-
+  componentWillMount() {
+    this.props.fetchPosts();
+  }
   componentDidMount() {
     this.props.fetchPosts();
   }
@@ -95,10 +97,13 @@ class PostsIndex extends Component {
   }
 }
 
-function mapStateToProps({ posts }) {
+function mapStateToProps({ posts, comments }) {
   return {
-    posts
+    posts,
+    commentsNo: _.values(comments).length
   };
 }
 
-export default connect(mapStateToProps, { fetchPosts })(PostsIndex);
+export default connect(mapStateToProps, { fetchPosts, deleteComment })(
+  PostsIndex
+);

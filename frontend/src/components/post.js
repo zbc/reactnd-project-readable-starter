@@ -7,19 +7,19 @@ import {
   downVote,
   fetchPosts,
   deletePost,
-  fetchComments
+  fetchComments,
+  fetchPost
 } from "../actions";
 import _ from "lodash";
 
 class Post extends Component {
   componentWillMount() {
-    console.log(this.props.id);
-    const { id } = this.props;
+    // console.log(this.props.id);
     this.props.fetchComments(this.props.id);
   }
 
   componentDidMount() {
-    console.log(_.values(this.props.comments));
+    // console.log(this.props.comments);
   }
 
   onUpVote(id) {
@@ -116,17 +116,19 @@ class Post extends Component {
   }
 }
 
-function mapStateToProps({ comments }) {
+const mapStateToProps = ({ comments }) => {
+  // console.log(comments);
   return {
-    comments,
+    comments: comments,
     commentsNo: _.values(comments).length
   };
-}
+};
 
 export default connect(mapStateToProps, {
   upVote,
   downVote,
   fetchPosts,
   deletePost,
-  fetchComments
+  fetchComments,
+  fetchPost
 })(Post);

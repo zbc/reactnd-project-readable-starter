@@ -6,7 +6,7 @@ import { Link } from "react-router-dom";
 import Post from "./post";
 
 class CategoryPosts extends Component {
-  componentDidMount() {
+  componentWillMount() {
     const { category } = this.props.match.params;
     this.props.fetchCategoryPosts(category);
   }

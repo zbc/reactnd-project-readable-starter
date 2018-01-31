@@ -20,15 +20,17 @@ const ROOT_URL = "http://localhost:3001";
 const AUTH_HEADER = { Authorization: "robo123" };
 
 export function fetchPosts() {
-  const request = axios({
-    method: "get",
-    url: `${ROOT_URL}/posts`,
-    headers: AUTH_HEADER
-  });
-
-  return {
-    type: FETCH_POSTS,
-    payload: request
+  return dispatch => {
+    axios({
+      method: "get",
+      url: `${ROOT_URL}/posts`,
+      headers: AUTH_HEADER
+    }).then(request => {
+      dispatch({
+        type: FETCH_POSTS,
+        payload: request
+      });
+    });
   };
 }
 
