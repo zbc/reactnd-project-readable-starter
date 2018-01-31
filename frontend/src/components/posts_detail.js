@@ -70,7 +70,7 @@ class PostsDetail extends Component {
             category={category}
             voteScore={voteScore}
             isDetail={true}
-            comments={_.size(this.props.comments)}
+            commentsNo={_.size(this.props.comments)}
           />
           <div>
             <CommentBox post_id={id} history={this.props.history} />

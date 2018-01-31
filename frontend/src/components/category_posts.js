@@ -21,7 +21,16 @@ class CategoryPosts extends Component {
 
   renderPosts() {
     return _.map(this.props.posts, post => {
-      const { id, title, body, author, timestamp, category, voteScore } = post;
+      const {
+        id,
+        title,
+        body,
+        author,
+        timestamp,
+        category,
+        voteScore,
+        commentCount
+      } = post;
 
       return (
         <Post
@@ -34,6 +43,7 @@ class CategoryPosts extends Component {
           category={category}
           voteScore={voteScore}
           isDetail={false}
+          commentsNo={commentCount}
         />
       );
     });

@@ -119,8 +119,7 @@ class Post extends Component {
 const mapStateToProps = ({ comments }) => {
   // console.log(comments);
   return {
-    comments: comments,
-    commentsNo: _.values(comments).length
+    comments: comments
   };
 };
 

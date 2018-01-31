@@ -30,7 +30,16 @@ class PostsIndex extends Component {
     postsSorted.sort(sortBy(`-${this.state.sort}`));
 
     return _.map(postsSorted, post => {
-      const { id, title, body, author, timestamp, category, voteScore } = post;
+      const {
+        id,
+        title,
+        body,
+        author,
+        timestamp,
+        category,
+        voteScore,
+        commentCount
+      } = post;
 
       return (
         <div key={id} className="section">
@@ -44,6 +53,7 @@ class PostsIndex extends Component {
             category={category}
             voteScore={voteScore}
             isDetail={false}
+            commentsNo={commentCount}
           />
         </div>
       );
