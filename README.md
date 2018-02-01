@@ -1,6 +1,4 @@
-# Run project
-
-To get started developing right away:
+## Run Project
 
 * Install and start the API server
     - `cd api-server`
