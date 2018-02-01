@@ -12,6 +12,7 @@ import Comment from "./comment";
 import CommentBox from "./comment_box";
 import _ from "lodash";
 import sortBy from "sort-by";
+import NotFound from "../components/NotFound";
 
 class PostsDetail extends Component {
   componentDidMount() {
@@ -47,7 +48,7 @@ class PostsDetail extends Component {
     const { post } = this.props;
 
     if (!post) {
-      return <div>Loading...</div>;
+      return <NotFound />;
     }
 
     const { id, title, body, author, timestamp, category, voteScore } = post;

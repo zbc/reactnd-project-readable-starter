@@ -10,7 +10,6 @@ import {
   fetchComments,
   fetchPost
 } from "../actions";
-import _ from "lodash";
 
 class Post extends Component {
   componentWillMount() {
